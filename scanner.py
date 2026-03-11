@@ -3,6 +3,8 @@ import random
 import multiprocessing
 from bitcoinlib.keys import Key, Address
 from addressList.addresses import addresses
+import mysql.connector
+from database import create_table, insert_wallet_data
 
 # ---------------- CONFIG ----------------
 NUM_PROCESSES = multiprocessing.cpu_count()  # use all CPU cores
@@ -50,7 +52,7 @@ def scanner_process(process_id, all_data_set):
         wallet = generate_random_wallet(private_key_hex)
         if not wallet:
             continue
-
+        # adrs ="173MqyKyBfomc3ry38hEolCmPiErGApk16"
         if wallet['address'] in all_data_set:
             with lock:
                 with open(FOUND_FILE, "a") as file:
@@ -64,8 +66,19 @@ def scanner_process(process_id, all_data_set):
                         "----------------------------------------------------------------\n"
                     )
 
+                # Store data in database
+                network_name = Address(wallet['address']).network.name
+                insert_wallet_data(
+                    wallet['private_key'],
+                    wallet['private_key_hex'],
+                    wallet['public_key'],
+                    wallet['address'],
+                    network_name
+                )
+
             print(GREEN + f"[Process-{process_id}] 🎯 FOUND ADDRESS!")
             print(GREEN + wallet['address'])
+            
 
         else:
             print(RED + f"[Process-{process_id}] Not found |" + YELLOW + f"{wallet['address']}")
@@ -77,7 +90,10 @@ def main():
     all_data_set = btc_address_data_set.union(addresses)
 
     print(f"Total addresses loaded: {len(all_data_set)}")
-    print(f"Starting {NUM_PROCESSES} processes...\n")
+    print("Initializing database...")
+    # if not create_table():
+    #     print("Warning: Database initialization failed. Scanner will continue without database storage.")
+    # print(f"Starting {NUM_PROCESSES} processes...\n")
 
     processes = []
     for i in range(NUM_PROCESSES):
