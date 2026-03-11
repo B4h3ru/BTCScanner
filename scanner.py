@@ -2,11 +2,11 @@ import os
 import random
 import multiprocessing
 from bitcoinlib.keys import Key, Address
-from addresses import addresses
+from addressList.addresses import addresses
 
 # ---------------- CONFIG ----------------
 NUM_PROCESSES = multiprocessing.cpu_count()  # use all CPU cores
-ADDRESS_FILE = "BTCAddressList.txt"
+ADDRESS_FILE = "/addressList/BTCAddressList.txt"
 FOUND_FILE = "foundAddress.txt"
 GREEN = "\033[92m"
 RED = "\033[91m"

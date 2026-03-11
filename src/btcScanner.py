@@ -6,7 +6,7 @@ from bitcoinlib.wallets import Wallet
 from bitcoinlib.mnemonic import Mnemonic
 from bitcoinlib.services.services import Service
 import random
-from addresses import addresses
+from addressList.addresses import addresses
 
 
 def generate_random_32byte_array():
@@ -58,7 +58,7 @@ def load_file_to_set(filename):
     with open(filename, "r", encoding="utf-8") as file:
         return set(line.strip() for line in file if line.strip()) #strip whitespace/newlines and ignore empty lines
 
-def search_value(value, data_set):
+def search_value(value, data_set)->bool:
     return value in data_set
 
 
@@ -93,7 +93,7 @@ def scanner():
             print("The Address is : ",wallet['address'])
         else:
             print("Not Found")
-            print("Private Key (WIF):", wallet['private_key'])
+            # print("Private Key (WIF):", wallet['private_key'])
             # # print("Private Key (hex):", wallet['private_key_hex'])
             # # print("Public Key:", wallet['public_key'])
             # print("BTC Address  : ",wallet['address'])
