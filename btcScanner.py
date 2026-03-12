@@ -108,8 +108,9 @@ def scanner():
             print("congratulation BTC Addres is found")
             print("The Address is : ",wallet['address'])
         else:
-            print("Not Found")
-            print("Private Key (WIF):", wallet['private_key'])
+            pass
+            # print("Not Found")
+            # print("Private Key (WIF):", wallet['private_key'])
             # # print("Private Key (hex):", wallet['private_key_hex'])
             # # print("Public Key:", wallet['public_key'])
             # print("BTC Address  : ",wallet['address'])
