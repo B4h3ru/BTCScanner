@@ -91,9 +91,9 @@ def main():
 
     print(f"Total addresses loaded: {len(all_data_set)}")
     print("Initializing database...")
-    # if not create_table():
-    #     print("Warning: Database initialization failed. Scanner will continue without database storage.")
-    # print(f"Starting {NUM_PROCESSES} processes...\n")
+    if not create_table():
+        print("Warning: Database initialization failed. Scanner will continue without database storage.")
+    print(f"Starting {NUM_PROCESSES} processes...\n")
 
     processes = []
     for i in range(NUM_PROCESSES):
