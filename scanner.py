@@ -52,7 +52,7 @@ def scanner_process(process_id, all_data_set):
         wallet = generate_random_wallet(private_key_hex)
         if not wallet:
             continue
-        # adrs ="173MqyKyBfomc3ry38hEolCmPiErGApk16"
+        # adrs ="173MqyKyBfomc3ry38hEolCmPiErGApk16"  #wallet['address']
         if wallet['address'] in all_data_set:
             with lock:
                 with open(FOUND_FILE, "a") as file:
