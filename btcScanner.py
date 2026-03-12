@@ -70,6 +70,8 @@ def search_value(value, data_set)->bool:
 # print("length of old set :",len(all_data_set))
 
 def scanner():
+    
+    print("Bitcoin Hunting is started........")
     while(True):
     
         all_data_set = load_file_to_set("addressList/BTCAddressList.txt")
@@ -77,7 +79,6 @@ def scanner():
         private_key_array = generate_random_32byte_array() # [97, 111, 222, 17, 231, 209, 215, 255, 49, 82, 8, 210, 125, 6, 89, 120, 221, 206, 102, 76, 154, 6, 197, 12, 215, 110, 13, 15, 124, 44, 146, 253] 
         private_key_hex = ''.join(f'{b:02x}' for b in private_key_array) #convert 32byte array to hex string
         wallet = generate_random_wallet(private_key_hex)
-        
        
         if search_value(wallet['address'], all_data_set):
             with open("foundAddress.txt","a") as file:
